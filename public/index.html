@@ -3,27 +3,29 @@
     <title>크롤링 통계</title>
     <link rel="stylesheet" href="nwagon/Nwagon.css" type="text/css">
     <script src="nwagon/Nwagon.js"></script>
-    <script>
-        function getData(gte, lt){
-            $.ajax({    
-                type : "POST",
-                url : "/count",
-                data : {'gte':gte, 'lt':lt},
-                success : function(data){
-                    return data;
-                },
-                error : function(){
-                    alert('Server Error!');
-                }
-            });
-        }
-    </script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 <body>
     <h2 align="center">크롤링 된 데이터</h2>
     <div id="Nwagon"></div>
     <script>
+        var flag=0;
+        function getData(gte, lt, i){
+            $.ajax({    
+                type : "POST",
+                url : "/count",
+                data : {'gte':gte, 'lt':lt},
+                success : function(data){
+                    cnt[i]=Number(data);
+                    flag++;
+                    if(flag==31) drawChart();
+                },
+                error : function(){
+                    alert('Server Error!');
+                }
+            });
+        }
+
         var w=screen.width-50;
         var h=screen.height-50;
         var dt = new Array(31);
@@ -35,24 +37,26 @@
             dt[i]=new Date(t.getTime()-86400000*i);
             day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
             if(i==0)
-                cnt[i]=Number(getData(dt[i].getTime(),Date.now()));
+                getData(dt[i].getTime(),Date.now(),i);
             else
-                cnt[i]=Number(getData(dt[i].getTime(),dt[i-1].getTime()));
+                getData(dt[i].getTime(),dt[i-1].getTime(),i);
         }
-        var options = {
-            'legend': {
-                names: day
-            },
-            'dataset': {
-                title: '크롤링 된 데이터',
-                values: cnt,
-                colorset: ['#DC143C', '#FF8C00', "#30a1ce"]
-            },
-            'chartDiv': 'Nwagon',
-            'chartType': 'column',
-            'chartSize': { width: w, height: h },
-            'increment': 1000
-        };
-        Nwagon.chart(options);
+        function drawChart(){
+            var options = {
+                'legend': {
+                    names: day
+                },
+                'dataset': {
+                    title: '크롤링 된 데이터',
+                    values: cnt,
+                    colorset: ['#DC143C', '#FF8C00', "#30a1ce"]
+                },
+                'chartDiv': 'Nwagon',
+                'chartType': 'column',
+                'chartSize': { width: w, height: h },
+                'increment': 1000
+            };
+            Nwagon.chart(options);
+        }
     </script>
 </body>
