@@ -44,11 +44,11 @@
         function drawChart(){
             var options = {
                 'legend': {
-                    names: day
+                    names: day.reverse()
                 },
                 'dataset': {
                     title: '크롤링 된 데이터',
-                    values: cnt,
+                    values: cnt.reverse(),
                     colorset: ['#DC143C', '#FF8C00', "#30a1ce"]
                 },
                 'chartDiv': 'Nwagon',
