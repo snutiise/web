@@ -1,7 +1,58 @@
 <head>
-    <title>테스트</title>
+    <meta charset="utf-8">
+    <title>크롤링 통계</title>
+    <link rel="stylesheet" href="nwagon/Nwagon.css" type="text/css">
+    <script src="nwagon/Nwagon.js"></script>
+    <script>
+        function getData(gte, lt){
+            $.ajax({    
+                type : "POST",
+                url : "/count",
+                data : {'gte':gte, 'lt':lt},
+                success : function(data){
+                    return data;
+                },
+                error : function(){
+                    alert('Server Error!');
+                }
+            });
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
-
 <body>
-    <h2>test2</h2>
+    <h2 align="center">크롤링 된 데이터</h2>
+    <div id="Nwagon"></div>
+    <script>
+        var w=h=screen.width-50;
+        var h=screen.height-50;
+        var dt = new Array(31);
+        var day = new Array(31);
+        var cnt = new Array(31);
+        var tmp = new Date();
+        var t = new Date(tmp.getFullYear()+"-"+(tmp.getMonth()+1)+"-"+tmp.getDate());
+        for(i=0;i<31;i++){
+            dt[i]=new Date(t.getTime()-86400000*i);
+            day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
+            if(i==0)
+                cnt[i]=getData(dt[i].getTime(),Date.now());
+            else
+                cnt[i]=getData(dt[i].getTime(),dt[i-1].getTime())
+        }
+        var options = {
+            'legend': {
+                names: day
+            },
+            'dataset': {
+                title: '크롤링 된 데이터',
+                values: [0,30,27,55],
+                colorset: ['#DC143C', '#FF8C00', "#30a1ce"]
+            },
+            'chartDiv': 'Nwagon',
+            'chartType': 'column',
+            'chartSize': { width: w, height: h },
+            'increment': 1000
+        };
+        Nwagon.chart(options);
+    </script>
 </body>
