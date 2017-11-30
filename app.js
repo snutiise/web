@@ -25,7 +25,7 @@ app.post('/count', function(req, res){
         else {
             db.collection('drop').find({num:{'$gte':gte,'$lt':lt}}).count(function(err, cnt){
                 if(err) console.log(err);
-                res.send(Number(cnt));
+                res.send(String(cnt));
             });
             db.close();
         }

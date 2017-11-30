@@ -24,7 +24,7 @@
     <h2 align="center">크롤링 된 데이터</h2>
     <div id="Nwagon"></div>
     <script>
-        var w=h=screen.width-50;
+        var w=screen.width-50;
         var h=screen.height-50;
         var dt = new Array(31);
         var day = new Array(31);
@@ -35,9 +35,9 @@
             dt[i]=new Date(t.getTime()-86400000*i);
             day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
             if(i==0)
-                cnt[i]=getData(dt[i].getTime(),Date.now());
+                cnt[i]=Number(getData(dt[i].getTime(),Date.now()));
             else
-                cnt[i]=getData(dt[i].getTime(),dt[i-1].getTime())
+                cnt[i]=Number(getData(dt[i].getTime(),dt[i-1].getTime()));
         }
         var options = {
             'legend': {
@@ -45,7 +45,7 @@
             },
             'dataset': {
                 title: '크롤링 된 데이터',
-                values: [0,30,27,55],
+                values: cnt,
                 colorset: ['#DC143C', '#FF8C00', "#30a1ce"]
             },
             'chartDiv': 'Nwagon',
