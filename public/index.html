@@ -14,7 +14,7 @@
             $.ajax({    
                 type : "POST",
                 url : "/count",
-                data : {'gte':gte, 'lt':lt},
+                data : {'gte':gte-32400000, 'lt':lt-32400000},
                 success : function(data){
                     cnt[i]=Number(data);
                     flag++;
@@ -37,7 +37,7 @@
             dt[i]=new Date(t.getTime()-86400000*i);
             day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
             if(i==0)
-                getData(dt[i].getTime(),Date.now(),i);
+                getData(dt[i].getTime(),Date.now()+32400000,i);
             else
                 getData(dt[i].getTime(),dt[i-1].getTime(),i);
         }
