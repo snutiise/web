@@ -46,10 +46,10 @@ app.post('/keyword', function(req, res){
                 if(doc!=null){
                     flag++;
                     var data = new Object();
-                    data.word=doc['_id'];
-                    data.cnt=doc['count'];
-                    console.log(data);
-                    wordList.push(data);
+                    //data.word=doc['_id'];
+                    //data.cnt=doc['count'];
+                    //console.log(data);
+                    wordList.push(doc);
                     if(flag==50) res.send(wordList);
                 }
             })
