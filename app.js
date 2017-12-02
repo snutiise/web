@@ -49,4 +49,4 @@ app.post('/keyword', function(req, res){
 app.use((req, res, next) => {
     res.status(404).redirect('http://sodeok.xyz');
 });
-app.listen(8001);
+app.listen(8000);
