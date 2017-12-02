@@ -27,13 +27,13 @@
                 }
             });
         }
-        function getKeyword(gte, lt, i){
+        function getKeyword(gte, lt){
             $.ajax({    
                 type : "POST",
                 url : "/keyword",
                 data : {'gte':gte-time, 'lt':lt-time},
                 success : function(data){
-                    keywordData[i]=data;
+                    alert(data);
                 },
                 error : function(){
                     alert('Server Error!');
@@ -46,20 +46,17 @@
         var dt = new Array(31);
         var day = new Array(31);
         var cnt = new Array(31);
-        var keywordData = new Array(31);
         var tmp = new Date();
         var t = new Date(tmp.getFullYear()+"-"+(tmp.getMonth()+1)+"-"+tmp.getDate());
         for(i=0;i<31;i++){
             dt[i]=new Date(t.getTime()-86400000*i);
             day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
             if(i==0){
-                getKeyword(dt[i].getTime(),Date.now()+time,i);
+                getKeyword(dt[i].getTime(),Date.now()+time);
                 getData(dt[i].getTime(),Date.now()+time,i);
             }
-            else{
-                getKeyword(dt[i].getTime(),dt[i-1].getTime(),i);
+            else
                 getData(dt[i].getTime(),dt[i-1].getTime(),i);
-            }
         }
         function drawChart(){
             var options = {
