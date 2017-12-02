@@ -39,8 +39,19 @@ app.post('/keyword', function(req, res){
     Client.connect('mongodb://localhost:27017/yagall', function(error, db) {
         if(error) console.log(error);
         else {
+            var wordList = new Array() ;
+            var flag=0;
             var cursor = db.collection('word').aggregate({$match:{'num':{$gte:gte,$lt:lt}}},{$group:{_id:"$word",count:{$sum:1}}},{$sort:{"count":-1}},{$limit:50})
-            res.send(cursor);
+            cursor.each(function(doc){
+                if(doc!=null){
+                    flag++;
+                    var data = new Object();
+                    data.word=doc['_id'];
+                    data.cnt=doc['count'];
+                    wordList.push(data);
+                    if(flag==50) res.send(wordList);
+                }
+            })
             db.close();
         }
     });  
