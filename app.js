@@ -50,7 +50,8 @@ app.post('/keyword', function(req, res){
                         data.cnt=tag['count'];
                         wordList.push(data);
                     });
-                    res.send(wordList);
+                    var jsonData = JSON.stringify(wordList) ;
+                    res.send(jsonData);
                     db.close();
                 }
             });
