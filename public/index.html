@@ -9,12 +9,14 @@
     <h2 align="center">크롤링 된 데이터</h2>
     <div id="Nwagon"></div>
     <script>
+        var time=0;
+        if(navigator.userAgent.indexOf("Firefox") != -1) time=32400000;
         var flag=0;
         function getData(gte, lt, i){
             $.ajax({    
                 type : "POST",
                 url : "/count",
-                data : {'gte':gte-32400000, 'lt':lt-32400000},
+                data : {'gte':gte-time, 'lt':lt-time},
                 success : function(data){
                     cnt[i]=Number(data);
                     flag++;
@@ -37,7 +39,7 @@
             dt[i]=new Date(t.getTime()-86400000*i);
             day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
             if(i==0)
-                getData(dt[i].getTime(),Date.now()+32400000,i);
+                getData(dt[i].getTime(),Date.now()+time,i);
             else
                 getData(dt[i].getTime(),dt[i-1].getTime(),i);
         }
