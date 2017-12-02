@@ -41,7 +41,7 @@ app.post('/keyword', function(req, res){
         else {
             var wordList = new Array() ;
             var flag=0;
-            var cursor = db.collection('word').aggregate({$match:{'num':{$gte:gte,$lt:lt}}},{$group:{_id:"$word",count:{$sum:1}}},{$sort:{"count":-1}},{$limit:50})
+            var cursor = db.collection('word').aggregate({$match:{'num':{$gte:gte,$lt:lt}}},{$group:{_id:"$word",count:{$sum:1}}},{$sort:{"count":-1}},{$limit:10})
             cursor.each(function(err, doc){
                 if(err) console.log(err);
                 if(doc){
