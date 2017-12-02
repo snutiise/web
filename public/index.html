@@ -1,13 +1,13 @@
 <head>
     <meta charset="utf-8">
-    <title>크롤링 통계</title>
+    <title>데이터 통계</title>
     <link rel="stylesheet" href="nwagon/Nwagon.css" type="text/css">
     <script src="nwagon/Nwagon.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 <body>
-    <h2 align="center">크롤링 된 데이터</h2>
-    <div id="Nwagon"></div>
+    <h2 align="center">데이터 통계</h2>
+    <div id="Nwagon"></div>계
     <script>
         var time=0;
         if(navigator.userAgent.indexOf("Firefox") != -1) time=32400000;
@@ -27,13 +27,13 @@
                 }
             });
         }
-        function getKeyword(gte, lt){
+        function getKeyword(gte, lt, i){
             $.ajax({    
                 type : "POST",
                 url : "/keyword",
                 data : {'gte':gte-time, 'lt':lt-time},
                 success : function(data){
-                    alert(data);
+                    keywordData[i]=data;
                 },
                 error : function(){
                     alert('Server Error!');
@@ -46,17 +46,20 @@
         var dt = new Array(31);
         var day = new Array(31);
         var cnt = new Array(31);
+        var keywordData = new Array(31);
         var tmp = new Date();
         var t = new Date(tmp.getFullYear()+"-"+(tmp.getMonth()+1)+"-"+tmp.getDate());
         for(i=0;i<31;i++){
             dt[i]=new Date(t.getTime()-86400000*i);
             day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
             if(i==0){
-                getKeyword(dt[i].getTime(),Date.now()+time);
+                getKeyword(dt[i].getTime(),Date.now()+time,i);
                 getData(dt[i].getTime(),Date.now()+time,i);
             }
-            else
+            else{
+                getKeyword(dt[i].getTime(),dt[i-1].getTime(),i);
                 getData(dt[i].getTime(),dt[i-1].getTime(),i);
+            }
         }
         function drawChart(){
             var options = {

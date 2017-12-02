@@ -45,7 +45,7 @@ app.post('/keyword', function(req, res){
                 if(err) console.log(err);
                 if(doc){
                     doc.forEach(function(tag){
-                        if(flag<=20&&String(tag['_id']).length>1){
+                        if(flag<20&&String(tag['_id']).length>1){
                             var data = new Object();
                             data.word=tag['_id'];
                             data.cnt=tag['count'];
