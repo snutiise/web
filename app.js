@@ -44,7 +44,9 @@ app.post('/keyword', function(req, res){
             db.collection('word').aggregate([{$match:{'num':{$gte:gte,$lt:lt}}},{$group:{_id:"$word",count:{$sum:1}}},{$sort:{"count":-1}},{$limit:50}],function(err,doc){
                 if(err) console.log(err);
                 if(doc){
-                    console.log(doc);
+                    doc.forEach(function(tag){
+                        console.log(tag['_id'])
+                    });
                     wordList.push(doc);
                     res.send(wordList);
                     db.close();
