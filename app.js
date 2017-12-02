@@ -41,20 +41,16 @@ app.post('/keyword', function(req, res){
         else {
             var wordList = new Array() ;
             var flag=0;
-            var cursor = db.collection('word').aggregate({$match:{'num':{$gte:gte,$lt:lt}}},{$group:{_id:"$word",count:{$sum:1}}},{$sort:{"count":-1}},{$limit:10})
+            var cursor = db.collection('word').aggregate({$match:{'num':{$gte:gte,$lt:lt}}},{$group:{_id:"$word",count:{$sum:1}}},{$sort:{"count":-1}},{$limit:10});
             cursor.each(function(err, doc){
                 if(err) console.log(err);
                 if(doc){
                     flag++;
-                    //var data = new Object();
-                    //data.word=doc['_id'];
-                    //data.cnt=doc['count'];
-                    //console.log(data);
-                    console.log(doc);
+                    console.log(doc.lenth);
                     wordList.push(doc);
                     if(flag==50) res.send(wordList);
                 }
-            })
+            });
             db.close();
         }
     });  
