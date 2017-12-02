@@ -45,9 +45,11 @@ app.post('/keyword', function(req, res){
                 if(err) console.log(err);
                 if(doc){
                     doc.forEach(function(tag){
-                        console.log(tag['_id'])
+                        var data = new Object();
+                        data.word=tag['_id'];
+                        data.cnt=tag['count'];
+                        wordList.push(data);
                     });
-                    wordList.push(doc);
                     res.send(wordList);
                     db.close();
                 }
