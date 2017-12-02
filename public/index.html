@@ -27,6 +27,19 @@
                 }
             });
         }
+        function getKeyword(gte, lt){
+            $.ajax({    
+                type : "POST",
+                url : "/keyword",
+                data : {'gte':gte-time, 'lt':lt-time},
+                success : function(data){
+                    alert(data);
+                },
+                error : function(){
+                    alert('Server Error!');
+                }
+            });
+        }
 
         var w=screen.width-50;
         var h=screen.height-50;
@@ -38,8 +51,10 @@
         for(i=0;i<31;i++){
             dt[i]=new Date(t.getTime()-86400000*i);
             day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
-            if(i==0)
+            if(i==0){
+                getKeyword(dt[i].getTime(),Date.now()+time);
                 getData(dt[i].getTime(),Date.now()+time,i);
+            }
             else
                 getData(dt[i].getTime(),dt[i-1].getTime(),i);
         }

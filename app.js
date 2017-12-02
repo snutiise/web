@@ -32,6 +32,20 @@ app.post('/count', function(req, res){
     });
 });
 
+app.post('/keyword', function(req, res){
+    var gte = Number(req.body.gte);
+    var lt = Number(req.body.lt);
+
+    Client.connect('mongodb://localhost:27017/yagall', function(error, db) {
+        if(error) console.log(error);
+        else {
+            var cursor = db.collection('word').aggregate({$match:{'num':{$gte:gte,$lt:lt}}},{$group:{_id:"$word",count:{$sum:1}}},{$sort:{"count":-1}},{$limit:50})
+            res.send(cursor);
+            db.close();
+        }
+    });  
+});
+
 app.use((req, res, next) => {
     res.status(404).redirect('http://sodeok.xyz');
 });
