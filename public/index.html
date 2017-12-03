@@ -52,14 +52,18 @@
                 success : function(data){
                     $("#Pi_Nwagon").html("");
                     var json=JSON.parse(data);
-                    alert(data);
-                    alert(json);
+                    var keyword = new Array(20);
+                    var cnt = new Array(20);
+                    for(i=0;i<20;i++){
+                        keyword.push(json[i]["word"]);
+                        cnt.push(json[i]["cnt"]);
+                    }
                     var options = {
                         'dataset':{
                             title: 'KeyWord',
-                            values:[25, 3 , 10, 7],
+                            values: cnt,
                             colorset: ['#2EB400', '#2BC8C9', "#666666", '#f09a93'],
-                            fields: ['A', 'B',  'C', 'D'],
+                            fields: keyword,
                         },
                         'donut_width' : 85,
                         'core_circle_radius':0,
