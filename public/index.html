@@ -75,7 +75,8 @@
             Nwagon.chart(options);
             $(".Nwagon_column .foreground .columns g").on("click", function(){
                 var index = $(".Nwagon_column .foreground .columns g").index(this);
-                alert(index)
+                var date=$(".Nwagon_column .labels text").eq(index).text();
+                alert(date);
             });
         }
     </script>
