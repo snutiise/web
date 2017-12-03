@@ -40,10 +40,6 @@
                 }
             });
         }
-        $(".Nwagon_column .foreground .columns g").on("click", function(){
-            var index = $(".Nwagon_column .foreground .columns g").index(this);
-            alert(index)
-        });
         var w=screen.width-50;
         var h=screen.height-50;
         var dt = new Array(31);
@@ -77,6 +73,10 @@
                 'increment': 5000
             };
             Nwagon.chart(options);
+            $(".Nwagon_column .foreground .columns g").on("click", function(){
+                var index = $(".Nwagon_column .foreground .columns g").index(this);
+                alert(index)
+            });
         }
     </script>
 </body>
