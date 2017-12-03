@@ -75,9 +75,7 @@
                 var index = $(".Nwagon_column .foreground .columns g").index(this);
                 var date=new Date($(".Nwagon_column .labels text").eq(index).text());
 
-                //getKeyword
-                alert(date);
-                alert(date.now());
+                getKeyword(date.getTime(),date.getTime()+86400000);
             });
         }
     </script>
