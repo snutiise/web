@@ -52,8 +52,8 @@
                 success : function(data){
                     $("#Pi_Nwagon").html("");
                     var json=JSON.parse(data);
-                    var keyword = new Array(20);
-                    var cnt = new Array(20);
+                    var keyword = new Array();
+                    var cnt = new Array();
                     for(i=0;i<20;i++){
                         keyword.push(json[i]["word"]);
                         cnt.push(json[i]["cnt"]);
