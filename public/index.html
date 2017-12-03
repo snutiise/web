@@ -17,7 +17,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">키워드</h4>
+                    <h4 class="modal-title" id="myModalLabel" style=" text-align: center;">키워드</h4>
                 </div>
                 <div class="modal-body">
                     <div id="Pi_Nwagon"></div>
@@ -51,28 +51,30 @@
                 data : {'gte':gte-time, 'lt':lt-time},
                 success : function(data){
                     $("#Pi_Nwagon").html("");
-                    var json=JSON.parse(data);
-                    var keyword = new Array();
-                    var cnt = new Array();
-                    for(i=0;i<20;i++){
-                        keyword.push(json[i]["word"]);
-                        cnt.push(json[i]["cnt"]);
-                    }
-                    var options = {
-                        'dataset':{
-                            title: 'KeyWord',
-                            values: cnt,
-                            colorset: ['#2EB400', '#2BC8C9', "#666666", '#f09a93', '#0000cc', '#66ffff', '#339966', '#00e600', '#ffff00', '#999966', '#ff8000', '#e63900', '#993333', '#e60073', '#990099', '#ff0066', '#cc00ff', '#6600ff', '#666699', '#000066'],
-                            fields: keyword,
-                        },
-                        'donut_width' : 150,
-                        'core_circle_radius':0,
-                        'chartDiv': 'Pi_Nwagon',
-                        'chartType': 'pie',
-                        'chartSize': {width:1000, height:600}
-                    };
-                    Nwagon.chart(options);
-                    $('#myModal').modal('show');
+                    if(data){
+                        var json=JSON.parse(data);
+                        var keyword = new Array();
+                        var cnt = new Array();
+                        for(i=0;i<20;i++){
+                            keyword.push(json[i]["word"]);
+                            cnt.push(json[i]["cnt"]);
+                        }
+                        var options = {
+                            'dataset':{
+                                title: 'KeyWord',
+                                values: cnt,
+                                colorset: ['#2EB400', '#2BC8C9', "#666666", '#f09a93', '#0000cc', '#66ffff', '#339966', '#00e600', '#ffff00', '#999966', '#ff8000', '#e63900', '#993333', '#e60073', '#990099', '#ff0066', '#cc00ff', '#6600ff', '#666699', '#000066'],
+                                fields: keyword,
+                            },
+                            'donut_width' : 150,
+                            'core_circle_radius':0,
+                            'chartDiv': 'Pi_Nwagon',
+                            'chartType': 'pie',
+                            'chartSize': {width:1000, height:600}
+                        };
+                        Nwagon.chart(options);
+                        $('#myModal').modal('show');
+                    }else alert("키워드 데이터가 없습니다!");
                 },
                 error : function(){
                     alert('Server Error!');
