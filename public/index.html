@@ -50,7 +50,8 @@
                 url : "/keyword",
                 data : {'gte':gte-time, 'lt':lt-time},
                 success : function(data){
-                    alert(data);
+                    $("Pi_Nwagon").html("");
+                    alert(data["word"]);
                     var options = {
                         'dataset':{
                             title: 'KeyWord',
