@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2 align="center">데이터 통계</h2>
-    <div id="Nwagon"></div>계
+    <div id="Nwagon"></div>
     <script>
         var time=0;
         if(navigator.userAgent.indexOf("Firefox") != -1) time=32400000;
@@ -40,7 +40,10 @@
                 }
             });
         }
-
+        $("g.columns g").on("click", function(){
+            var index = $("g.columns g").index(this);
+            alert(index)
+        });
         var w=screen.width-50;
         var h=screen.height-50;
         var dt = new Array(31);
