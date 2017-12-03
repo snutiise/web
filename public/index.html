@@ -49,7 +49,7 @@
         var t = new Date(tmp.getFullYear()+"-"+(tmp.getMonth()+1)+"-"+tmp.getDate());
         for(i=0;i<31;i++){
             dt[i]=new Date(t.getTime()-86400000*i);
-            day[i]=(dt[i].getMonth()+1)+"-"+dt[i].getDate();
+            day[i]=dt[i].getFullYear()+"-"+(dt[i].getMonth()+1)+"-"+dt[i].getDate();
             if(i==0){
                 getKeyword(dt[i].getTime(),Date.now()+time);
                 getData(dt[i].getTime(),Date.now()+time,i);
