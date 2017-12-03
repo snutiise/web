@@ -51,7 +51,7 @@
                 data : {'gte':gte-time, 'lt':lt-time},
                 success : function(data){
                     $("#Pi_Nwagon").html("");
-                    if(data){
+                    if(data!=[]){
                         var json=JSON.parse(data);
                         var keyword = new Array();
                         var cnt = new Array();
