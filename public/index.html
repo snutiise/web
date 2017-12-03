@@ -51,7 +51,8 @@
                 data : {'gte':gte-time, 'lt':lt-time},
                 success : function(data){
                     $("#Pi_Nwagon").html("");
-                    var json=eval(data);
+                    var json=JSON.parse(data);
+                    alert(data);
                     alert(json);
                     var options = {
                         'dataset':{
