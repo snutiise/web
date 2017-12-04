@@ -47,7 +47,7 @@ app.post('/keyword', function(req, res){
                     doc.forEach(function(tag){
                         if(flag<20&&String(tag['_id']).length>1){
                             var filter=String(tag['_id']);
-                            if(filter!="존나"&&filter!="시발"&&filter!="씨발"&&filter!="새끼"&&filter!="진짜"&&filter!="지금"&&filter!="오늘"){
+                            if(filter!="존나"&&filter!="시발"&&filter!="씨발"&&filter!="새끼"&&filter!="진짜"&&filter!="지금"&&filter!="오늘"&&filter!="본인"&&filter!="요즘"){
                                 var data = new Object();
                                 data.word=tag['_id'];
                                 data.cnt=tag['count'];
